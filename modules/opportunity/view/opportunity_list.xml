@@ -1,0 +1,6 @@
+<tree>
+   <field name="party"/>
+   <field name="description"/>
+   <field name="start_date"/>
+   <field name="end_date"/>
+</tree>
