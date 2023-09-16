@@ -1,0 +1,92 @@
+<tryton>
+    <data>
+      <!-- task.task -->
+      <record model="ir.ui.view" id="task_view_tree">
+         <field name="model">task.task</field>
+         <field name="type">tree</field>
+         <field name="name">task_tree</field>
+      </record>
+      <record model="ir.ui.view" id="task_view_form">
+         <field name="model">task.task</field>
+         <field name="type">form</field>
+         <field name="name">task_form</field>
+      </record>
+
+      <record model="ir.action.act_window" id="act_task">
+         <field name="name">Tasks</field>
+         <field name="res_model">task.task</field>
+      </record>
+      <record model="ir.action.act_window.view" id="act_rental_invoices_form_view1">
+         <field name="sequence" eval="20"/>
+         <field name="view" ref="task_view_form"/>
+         <field name="act_window" ref="act_task"/>
+      </record>
+      <record model="ir.action.act_window.view" id="act_rental_invoices_form_view2">
+         <field name="sequence" eval="10"/>
+         <field name="view" ref="task_view_tree"/>
+         <field name="act_window" ref="act_task"/>
+      </record>
+
+      <menuitem
+         name="Tasks"
+         id="menu_tasks"
+         sequence="100"
+         icon="tryton-board"/>
+      <menuitem
+         parent="menu_tasks"
+         action="act_task"
+         sequence="10"
+         id="menu_tasks_form"/>
+
+      <!-- Buttons of this model -->
+      <record model="ir.model.button" id="task_draft_button">
+         <field name="name">draft</field>
+         <field name="string">Draft</field>
+         <field name="model" search="[('model', '=', 'task.task')]"/>
+      </record>
+      <record model="ir.model.button" id="task_pending_button">
+         <field name="name">pending</field>
+         <field name="string">Pending</field>
+         <field name="model" search="[('model', '=', 'task.task')]"/>
+      </record>
+      <record model="ir.model.button" id="task_done_button">
+         <field name="name">done</field>
+         <field name="string">Done</field>
+         <field name="model" search="[('model', '=', 'task.task')]"/>
+      </record>
+
+      <!-- Tree view states of this model -->
+      <record model="ir.action.act_window.domain"
+         id="act_task_draft">
+         <field name="name">Draft</field>
+         <field name="count" eval="True"/>
+         <field name="sequence" eval="10"/>
+         <field name="domain" eval="[('state', '=', 'draft')]" pyson="1"/>
+         <field name="act_window" ref="act_task"/>
+      </record>
+      <record model="ir.action.act_window.domain"
+         id="act_task_pending">
+         <field name="name">Pending</field>
+         <field name="count" eval="True"/>
+         <field name="sequence" eval="20"/>
+         <field name="domain" eval="[('state', '=', 'pending')]" pyson="1"/>
+         <field name="act_window" ref="act_task"/>
+      </record>
+      <record model="ir.action.act_window.domain"
+         id="act_task_done">
+         <field name="name">Done</field>
+         <field name="count" eval="True"/>
+         <field name="sequence" eval="30"/>
+         <field name="domain" eval="[('state', '=', 'done')]" pyson="1"/>
+         <field name="act_window" ref="act_task"/>
+      </record>
+      <record model="ir.action.act_window.domain"
+         id="act_task_all">
+         <field name="name">All</field>
+         <field name="count" eval="True"/>
+         <field name="sequence" eval="40"/>
+         <field name="domain"></field>
+         <field name="act_window" ref="act_task"/>
+      </record>
+    </data>
+</tryton>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<tree>
+    <field name="code"/>
+    <field name="name"/>
+    <field name="issue"/>
+    <field name="end_date"/>
+</tree>

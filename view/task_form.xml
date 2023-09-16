@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<form>
+    <label name="name"/>
+    <field name="name"/>
+    <label name="code"/>
+    <field name="code"/>
+    <label name="issue"/>
+    <field name="issue"/>
+    <label name="end_date"/>
+    <field name="end_date"/>
+    <separator name="description" colspan="4"/>
+    <field name="description" colspan="4"/>
+    <label name="state"/>
+    <field name="state"/>
+    <group col="3" colspan="2" id="buttons">
+        <button name="draft" icon="tryton-cancel"/>
+        <button name="pending" icon="tryton-forward"/>
+        <button name="done" icon="tryton-ok"/>
+    </group>
+</form>

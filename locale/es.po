@@ -1,0 +1,87 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:task.configuration,task_sequence:"
+msgid "Sequences"
+msgstr "Secuencias"
+
+msgctxt "model:ir.ui.menu,name:menu_task_configuration"
+msgid "Configuration"
+msgstr "Configuración"
+
+msgctxt "field:task.task,name:"
+msgid "Task name"
+msgstr "Nombre"
+
+msgctxt "field:task.task,code:"
+msgid "Code"
+msgstr "Código"
+
+msgctxt "field:task.task,issue:"
+msgid "Issue"
+msgstr "Asunto"
+
+msgctxt "field:task.task,description:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "field:task.task,end_date:"
+msgid "End date task"
+msgstr "Fecha finalización de tarea"
+
+msgctxt "field:task.task,state:"
+msgid "State"
+msgstr "Estado"
+
+msgctxt "model:ir.ui.menu,name:menu_tasks"
+msgid "Task"
+msgstr "Tareas"
+
+msgctxt "model:ir.ui.menu,name:menu_tasks_form"
+msgid "Task"
+msgstr "Tareas"
+
+msgctxt "model:ir.model.button,string:task_draft_button"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt "model:ir.model.button,string:task_pending_button"
+msgid "Pending"
+msgstr "Pendiente"
+
+msgctxt "model:ir.model.button,string:task_done_button"
+msgid "Done"
+msgstr "Realizado"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_task_draft"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_task_pending"
+msgid "Pending"
+msgstr "Pendiente"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_task_done"
+msgid "Done"
+msgstr "Realizado"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_task_all"
+msgid "All"
+msgstr "Todo"
+
+msgctxt "selection:task.task,state:"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt "selection:task.task,state:"
+msgid "Pending"
+msgstr "Pendiente"
+
+msgctxt "selection:task.task,state:"
+msgid "Done"
+msgstr "Realizado"
