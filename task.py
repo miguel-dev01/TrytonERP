@@ -2,8 +2,7 @@ from trytond.model import (ModelView, ModelSQL, fields,
     Unique, Workflow)
 from trytond.pool import Pool
 from trytond.pyson import Eval, If, Bool
-from datetime import date as dt
-
+from datetime import timedelta, date as dt
 
 class Task(Workflow, ModelSQL, ModelView):
     '''Task'''
@@ -18,8 +17,7 @@ class Task(Workflow, ModelSQL, ModelView):
     end_date = fields.Date("End date task",
         domain=[
             If(Bool(Eval('end_date')),
-                ('end_date', '>=', dt.today()),
-                ())])
+                ('end_date', '>=', dt.today()), ())])
     state = fields.Selection([
         ('draft', "Draft"),
         ('pending', "Pending"),
@@ -34,7 +32,6 @@ class Task(Workflow, ModelSQL, ModelView):
         cls._sql_constraints = [
             ('code_uniq', Unique(t, t.code), 'tasks.msg_task_code_unique')
         ]
-
         cls._transitions.update({
             ('draft', 'pending'),
             ('draft', 'done'),
@@ -42,12 +39,15 @@ class Task(Workflow, ModelSQL, ModelView):
             ('pending', 'done'),
             ('done', 'pending'),
         })
-
         cls._buttons.update({
             'draft': {},
             'pending': {},
             'done': {}
         })
+
+    @staticmethod
+    def default_state():
+        return 'draft'
 
     @staticmethod
     def default_end_date():
@@ -71,8 +71,10 @@ class Task(Workflow, ModelSQL, ModelView):
         return super(Task, cls).create(vlist)
 
     @classmethod
-    def default_state(cls):
-        return 'draft'
+    def view_attributes(cls):
+        return super().view_attributes() + [
+            ('/tree', 'visual', If(Eval('end_date', 0) <= dt.today(), 'warning', '')),
+        ]
 
     @classmethod
     @Workflow.transition('draft')
