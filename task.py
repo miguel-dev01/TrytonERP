@@ -2,28 +2,42 @@ from trytond.model import (ModelView, ModelSQL, fields,
     Unique, Workflow)
 from trytond.pool import Pool
 from trytond.pyson import Eval, If, Bool
-from datetime import timedelta, date as dt
+from datetime import date as dt
+
 
 class Task(Workflow, ModelSQL, ModelView):
     '''Task'''
     __name__ = 'task.task'
 
     name = fields.Char("Task name", required=True,
+        states = {'readonly': Eval('state') == 'done'},
         help="The main identifier of the task.")
     code = fields.Char("Code", readonly=True,
+        states = {'readonly': Eval('state') == 'done'},
         help="The unique identifier of the task.")
-    issue = fields.Many2One('party.category', "Issue")
-    description = fields.Text('Description')
+    issue = fields.Many2One('party.category', "Issue", 
+        states = {'readonly': Eval('state') == 'done'})
+    description = fields.Text('Description',
+        states = {'readonly': Eval('state') == 'done'})
     end_date = fields.Date("End date task",
+        states = {'readonly': Eval('state') == 'done'},
         domain=[
             If(Bool(Eval('end_date')),
-                ('end_date', '>=', dt.today()), ())])
+                ('end_date', '>=', dt.today()), ())
+            ])
     state = fields.Selection([
-        ('draft', "Draft"),
-        ('pending', "Pending"),
-        ('done', "Done"),
-        ], "State",
-       required=True, readonly=True, sort=False)
+            ('draft', "Draft"),
+            ('pending', "Pending"),
+            ('done', "Done"),
+            ], "State",
+        required=True, readonly=True, sort=False)
+    priority = fields.Selection([
+            ('urgent', "Urgent"),
+            ('high', "High"),
+            ('normal', "Normal"),
+            ('low', "Low"),
+            ], "Priority", states = {'readonly': Eval('state') == 'done'},
+        required=True, sort=False, help='Indicates the priority of the task')
 
     @classmethod
     def __setup__(cls):
@@ -74,7 +88,15 @@ class Task(Workflow, ModelSQL, ModelView):
     def view_attributes(cls):
         return super().view_attributes() + [
             ('/tree', 'visual', If(Eval('end_date', 0) <= dt.today(), 'warning', '')),
+            ('/tree/field[@name="priority"]',
+                'visual', If(Eval('priority', '') == 'urgent', 'danger', '')),
         ]
+
+    @fields.depends('name', 'description')
+    def on_change_with_description(self, name=None):
+        if self.name and not self.description:
+            return self.name
+        return self.description if self.description else None
 
     @classmethod
     @Workflow.transition('draft')
@@ -90,3 +112,26 @@ class Task(Workflow, ModelSQL, ModelView):
     @Workflow.transition('done')
     def done(cls, records):
         pass
+
+
+class TaskEvent(ModelSQL, ModelView):
+    '''Task Event Calendar'''
+    __name__ = 'task.event'
+
+    name = fields.Char("Event name", required=True)
+    event_date = fields.Date("Event date", required=True)
+    calendar_bgcolor = fields.Function(
+        fields.Char('Background color'), 'get_calendar_bgcolor')
+
+    @classmethod
+    def view_attributes(cls):
+        return [
+            ('/tree', 'visual', 
+                If(Eval('event_date', 0) < dt.today(), 'success', 'danger')),
+        ]
+
+    def get_calendar_bgcolor(self, name=None):
+        if self.event_date < dt.today():
+            return 'lightblue'
+        else:
+            return 'red'

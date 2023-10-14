@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<calendar dtstart="event_date"
+    background_color="calendar_bgcolor">
+    <field name="name"/>
+</calendar>

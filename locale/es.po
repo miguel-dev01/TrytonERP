@@ -12,7 +12,7 @@ msgstr "Configuración"
 
 msgctxt "field:task.task,name:"
 msgid "Task name"
-msgstr "Nombre"
+msgstr "Nombre de tarea"
 
 msgctxt "field:task.task,code:"
 msgid "Code"
@@ -85,3 +85,43 @@ msgstr "Pendiente"
 msgctxt "selection:task.task,state:"
 msgid "Done"
 msgstr "Realizado"
+
+msgctxt "field:task.task,priority:"
+msgid "Priority"
+msgstr "Prioridad"
+
+msgctxt "selection:task.task,priority:"
+msgid "Urgent"
+msgstr "Urgente"
+
+msgctxt "selection:task.task,priority:"
+msgid "High"
+msgstr "Alta"
+
+msgctxt "selection:task.task,priority:"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "selection:task.task,priority:"
+msgid "Low"
+msgstr "Baja"
+
+msgctxt "help:task.task,priority:"
+msgid "Indicates the priority of the task"
+msgstr "Indica la prioridad de la tarea"
+
+msgctxt "field:task.event,name:"
+msgid "Event name"
+msgstr "Nombre del evento"
+
+msgctxt "field:task.event,event_date:"
+msgid "Event date"
+msgstr "Fecha del evento"
+
+msgctxt "model:ir.ui.menu,name:menu_event_calendar"
+msgid "Calendar"
+msgstr "Calendario - Eventos"
+
+msgctxt "model:ir.ui.menu,name:menu_event_tasks"
+msgid "Events"
+msgstr "Eventos"

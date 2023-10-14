@@ -4,4 +4,5 @@
     <field name="name"/>
     <field name="issue"/>
     <field name="end_date"/>
+    <field name="priority"/>
 </tree>
