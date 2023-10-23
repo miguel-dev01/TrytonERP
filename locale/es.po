@@ -54,6 +54,10 @@ msgctxt "model:ir.model.button,string:task_done_button"
 msgid "Done"
 msgstr "Realizado"
 
+msgctxt "model:ir.model.button,string:task_reject_button"
+msgid "Reject"
+msgstr "Rechazar"
+
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_task_draft"
 msgid "Draft"
@@ -77,6 +81,10 @@ msgstr "Todo"
 msgctxt "selection:task.task,state:"
 msgid "Draft"
 msgstr "Borrador"
+
+msgctxt "selection:task.task,state:"
+msgid "Rejected"
+msgstr "Rechazado"
 
 msgctxt "selection:task.task,state:"
 msgid "Pending"

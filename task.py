@@ -26,9 +26,10 @@ class Task(Workflow, ModelSQL, ModelView):
                 ('end_date', '>=', dt.today()), ())
             ])
     state = fields.Selection([
-            ('draft', "Draft"),
-            ('pending', "Pending"),
-            ('done', "Done"),
+            ('draft', 'Draft'),
+            ('rejected', 'Rejected'),
+            ('pending', 'Pending'),
+            ('done', 'Done'),
             ], "State",
         required=True, readonly=True, sort=False)
     priority = fields.Selection([
@@ -52,11 +53,15 @@ class Task(Workflow, ModelSQL, ModelView):
             ('pending', 'draft'),
             ('pending', 'done'),
             ('done', 'pending'),
+            ('draft', 'rejected'),
+            ('pending', 'rejected'),
+            ('rejected', 'draft')
         })
         cls._buttons.update({
             'draft': {},
             'pending': {},
-            'done': {}
+            'done': {},
+            'reject': {}
         })
 
     @staticmethod
@@ -111,6 +116,11 @@ class Task(Workflow, ModelSQL, ModelView):
     @classmethod
     @Workflow.transition('done')
     def done(cls, records):
+        pass
+
+    @classmethod
+    @Workflow.transition('rejected')
+    def reject(cls, records):
         pass
 
 
